@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Cost Report — Week 2, July 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#17222D;
+    --ink-soft:#4A5A68;
+    --line:#C9D2DA;
+    --line-strong:#8FA0AE;
+    --paper:#FFFFFF;
+    --bg:#EEF1F4;
+    --blueprint:#0F3D5C;
+    --blueprint-deep:#0A2B42;
+    --amber:#C77F17;
+    --red:#B3382C;
+    --red-bg:#FBEDEB;
+    --green:#1E7A4E;
+    --green-bg:#EAF4EE;
+    --neutral-bg:#F2F5F7;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'IBM Plex Sans',Arial,sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    font-size:15px;
+    line-height:1.45;
+  }
+  .sheet{
+    max-width:1080px;
+    margin:24px auto;
+    background:var(--paper);
+    border:1px solid var(--line-strong);
+    box-shadow:0 2px 14px rgba(15,61,92,.10);
+  }
+
+  /* ===== Title block ===== */
+  .titleblock{
+    border-bottom:3px solid var(--blueprint-deep);
+    display:grid;
+    grid-template-columns:1fr auto;
+  }
+  .tb-main{padding:26px 32px 20px;}
+  .tb-eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--blueprint);margin-bottom:8px;
+  }
+  h1{
+    font-family:'IBM Plex Sans Condensed',sans-serif;
+    font-size:34px;font-weight:700;line-height:1.1;color:var(--blueprint-deep);
+  }
+  .tb-sub{margin-top:6px;color:var(--ink-soft);font-size:14px;}
+  .tb-meta{
+    display:grid;grid-template-columns:1fr 1fr;
+    border-left:1px solid var(--line-strong);
+    min-width:320px;
+  }
+  .tb-cell{
+    padding:12px 18px;border-bottom:1px solid var(--line);
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  .tb-cell:nth-child(odd){border-right:1px solid var(--line);}
+  .tb-cell:nth-last-child(-n+2){border-bottom:none;}
+  .tb-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);}
+  .tb-value{font-weight:600;font-size:13.5px;margin-top:2px;}
+
+  /* ===== KPI strip ===== */
+  .kpis{
+    display:grid;grid-template-columns:repeat(5,1fr);
+    border-bottom:1px solid var(--line-strong);
+  }
+  .kpi{padding:20px 22px;border-right:1px solid var(--line);}
+  .kpi:last-child{border-right:none;}
+  .kpi-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);}
+  .kpi-value{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:25px;font-weight:600;margin-top:6px;color:var(--blueprint-deep);
+    font-variant-numeric:tabular-nums;
+  }
+  .kpi-note{font-size:11.5px;color:var(--ink-soft);margin-top:4px;}
+  .kpi-value.bad{color:var(--red);}
+  .kpi-value.warn{color:var(--amber);}
+  .kpi-value.good{color:var(--green);}
+
+  /* ===== Sections ===== */
+  section{padding:30px 32px 8px;}
+  section:last-of-type{padding-bottom:34px;}
+  .sec-head{display:flex;align-items:baseline;gap:14px;border-bottom:2px solid var(--blueprint-deep);padding-bottom:8px;margin-bottom:18px;}
+  .sec-no{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--amber);letter-spacing:.08em;}
+  h2{font-family:'IBM Plex Sans Condensed',sans-serif;font-size:21px;font-weight:700;color:var(--blueprint-deep);}
+  .sec-note{font-size:12.5px;color:var(--ink-soft);margin-left:auto;font-family:'IBM Plex Mono',monospace;}
+  h3{font-family:'IBM Plex Sans Condensed',sans-serif;font-size:15.5px;font-weight:600;color:var(--blueprint);margin:2px 0 10px;letter-spacing:.02em;}
+
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:22px;}
+  .grid-2 > div{min-width:0;}
+
+  /* ===== Tables ===== */
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin-bottom:20px;}
+  caption{text-align:left;font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:600;font-size:15.5px;color:var(--blueprint);padding-bottom:8px;}
+  th{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+    color:#fff;background:var(--blueprint);text-align:left;padding:8px 10px;font-weight:500;
+  }
+  th.num,td.num{text-align:right;font-variant-numeric:tabular-nums;}
+  td{padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top;}
+  td.num{font-family:'IBM Plex Mono',monospace;font-size:13px;}
+  tbody tr:nth-child(even){background:var(--neutral-bg);}
+  tr.total td{
+    border-top:2px solid var(--blueprint-deep);border-bottom:none;
+    font-weight:700;background:#E7EDF2;
+  }
+  tr.total td.num{font-weight:600;}
+  tr.subtotal td{background:#E7EDF2;font-weight:600;border-bottom:1px solid var(--line-strong);}
+  .pill{
+    display:inline-block;padding:1px 9px;border-radius:3px;
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;
+  }
+  .pill.over{background:var(--red-bg);color:var(--red);}
+  .pill.near{background:#FCF3E3;color:var(--amber);}
+  .pill.on{background:var(--green-bg);color:var(--green);}
+  .neg{color:var(--red);}
+  .ok{color:var(--green);}
+
+  .bar-wrap{background:#E2E8ED;height:9px;border-radius:2px;overflow:hidden;min-width:90px;}
+  .bar{height:100%;background:var(--red);}
+  .bar.ok{background:var(--green);}
+
+  .area-card{border:1px solid var(--line-strong);margin-bottom:22px;}
+  .area-head{
+    display:flex;align-items:center;gap:12px;
+    background:var(--blueprint-deep);color:#fff;padding:10px 16px;flex-wrap:wrap;
+  }
+  .area-head h3{color:#fff;margin:0;font-size:16px;}
+  .area-cpi{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:13px;}
+  .area-cpi b{font-size:16px;}
+  .area-body{padding:14px 16px 2px;}
+  .area-body table{margin-bottom:14px;}
+
+  .callout{
+    border-left:4px solid var(--amber);background:#FCF6EC;
+    padding:12px 16px;font-size:13.5px;color:#5C4A1E;margin:0 0 22px;
+  }
+  .callout b{color:#3F3210;}
+
+  footer{
+    border-top:2px solid var(--blueprint-deep);
+    padding:14px 32px;display:flex;justify-content:space-between;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);
+    letter-spacing:.05em;
+  }
+
+  @media (max-width:900px){
+    .kpis{grid-template-columns:1fr 1fr;}
+    .kpi{border-bottom:1px solid var(--line);}
+    .grid-2{grid-template-columns:1fr;}
+    .titleblock{grid-template-columns:1fr;}
+    .tb-meta{border-left:none;border-top:1px solid var(--line-strong);}
+  }
+  @media print{
+    body{background:#fff;}
+    .sheet{margin:0;border:none;box-shadow:none;max-width:none;}
+    section{page-break-inside:avoid;}
+    .area-card{page-break-inside:avoid;}
+    th,td,tr{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <!-- ============ TITLE BLOCK ============ -->
+  <header class="titleblock">
+    <div class="tb-main">
+      <div class="tb-eyebrow">Ertawi &middot; Cost Control</div>
+      <h1>Weekly Cost Report</h1>
+      <div class="tb-sub">Earned Value &amp; Actual Cost Status — Flowlines, AG-25, Well Pads, Questor &amp; Valve Station</div>
+    </div>
+    <div class="tb-meta">
+      <div class="tb-cell"><span class="tb-label">Reporting Week</span><span class="tb-value">Week 2 — July 2026</span></div>
+      <div class="tb-cell"><span class="tb-label">Data Period</span><span class="tb-value">30 June – 6 July 2026</span></div>
+      <div class="tb-cell"><span class="tb-label">Prepared By</span><span class="tb-value">Cost Control</span></div>
+      <div class="tb-cell"><span class="tb-label">Currency</span><span class="tb-value">USD</span></div>
+    </div>
+  </header>
+
+  <!-- ============ KPI STRIP ============ -->
+  <div class="kpis">
+    <div class="kpi">
+      <div class="kpi-label">Earned Value (EV)</div>
+      <div class="kpi-value">32,336</div>
+      <div class="kpi-note">All projects, this week</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Actual Cost (AC)</div>
+      <div class="kpi-value">84,742</div>
+      <div class="kpi-note">Captured for the week</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Overall CPI</div>
+      <div class="kpi-value bad">0.38</div>
+      <div class="kpi-note">EV / AC — all areas</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">CPI — Flowlines &amp; AG-25</div>
+      <div class="kpi-value bad">0.49</div>
+      <div class="kpi-note">EV 13,983 / AC 28,245</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">CPI — Well Pads &amp; Questor</div>
+      <div class="kpi-value bad">0.32</div>
+      <div class="kpi-note">EV 18,353 / AC 56,497</div>
+    </div>
+  </div>
+
+  <!-- ============ 1. EARNED VALUE ============ -->
+  <section id="planned">
+    <div class="sec-head">
+      <span class="sec-no">01</span>
+      <h2>Earned Value by Project</h2>
+      <span class="sec-note">Week 2 · July 2026</span>
+    </div>
+    <div class="grid-2">
+      <div>
+        <table>
+          <caption>Earned Value (EV) by Project</caption>
+          <thead>
+            <tr><th>Project</th><th class="num">EV (USD)</th><th class="num">Share</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Well Pads &amp; Valve Station</td><td class="num">14,343</td><td class="num">44.4%</td></tr>
+            <tr><td>Flow Line &amp; Cable Work</td><td class="num">10,279</td><td class="num">31.8%</td></tr>
+            <tr><td>Questor</td><td class="num">4,010</td><td class="num">12.4%</td></tr>
+            <tr><td>AG-25</td><td class="num">3,704</td><td class="num">11.5%</td></tr>
+            <tr class="total"><td>Grand Total</td><td class="num">32,336</td><td class="num">100%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <table>
+          <caption>EV vs Actual by Resource Type</caption>
+          <thead>
+            <tr><th>Resource Type</th><th class="num">EV</th><th class="num">Actual</th><th class="num">Variance</th><th style="width:110px;">&nbsp;</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>IGCC</td><td class="num">14,931</td><td class="num">35,919</td>
+              <td class="num neg">(20,988)</td>
+              <td><div class="bar-wrap"><div class="bar" style="width:100%"></div></div></td>
+            </tr>
+            <tr>
+              <td>Sub — Rent</td><td class="num">12,135</td><td class="num">21,105</td>
+              <td class="num neg">(8,970)</td>
+              <td><div class="bar-wrap"><div class="bar" style="width:43%"></div></div></td>
+            </tr>
+            <tr>
+              <td>IGCC — Sub Manpower</td><td class="num">528</td><td class="num">3,976</td>
+              <td class="num neg">(3,448)</td>
+              <td><div class="bar-wrap"><div class="bar" style="width:16%"></div></div></td>
+            </tr>
+            <tr>
+              <td>Sub — Unit Rate</td><td class="num">4,742</td><td class="num">4,742</td>
+              <td class="num ok">0</td>
+              <td><div class="bar-wrap"><div class="bar ok" style="width:2%"></div></div></td>
+            </tr>
+            <tr>
+              <td>Workshop</td><td class="num">0</td><td class="num">0</td>
+              <td class="num ok">0</td>
+              <td><div class="bar-wrap"></div></td>
+            </tr>
+            <tr class="total">
+              <td>Total (excl. materials)</td><td class="num">32,336</td><td class="num">65,742</td>
+              <td class="num neg">(33,406)</td><td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="callout">
+      <b>Reading note:</b> variances in parentheses are unfavourable (actual above earned value for the week). The largest weekly gap is again in <b>IGCC staff</b>. The resource-type table excludes materials (19,000 this week); including materials, total actual cost is <b>84,742</b>. Weekly figures are indicative — subcontractor and workshop costs follow a monthly capture cycle.
+    </div>
+  </section>
+
+  <!-- ============ 2. ACTUAL COST BY AREA ============ -->
+  <section id="actual">
+    <div class="sec-head">
+      <span class="sec-no">02</span>
+      <h2>Actual Cost by Area</h2>
+      <span class="sec-note">Direct works · this week</span>
+    </div>
+
+    <div class="area-card">
+      <div class="area-head">
+        <h3>Flowlines &amp; AG-25</h3>
+        <span class="area-cpi">EV 13,983 &nbsp;·&nbsp; AC 28,245 &nbsp;·&nbsp; CPI <b>0.49</b> <span class="pill over">Over for the week</span></span>
+      </div>
+      <div class="area-body">
+        <table>
+          <thead>
+            <tr><th>Cost Element</th><th class="num">Equipment</th><th class="num">Labor</th><th class="num">IGCC Staff</th><th class="num">Materials</th><th class="num">Unit Rate</th><th class="num">Workshop</th><th class="num">Total</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Direct</td><td class="num">6,630</td><td class="num">2,548</td><td class="num">13,575</td><td class="num">750</td><td class="num">4,742</td><td class="num">0</td><td class="num"><b>28,245</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="area-card">
+      <div class="area-head">
+        <h3>Well Pads &amp; Questor</h3>
+        <span class="area-cpi">EV 18,353 &nbsp;·&nbsp; AC 56,497 &nbsp;·&nbsp; CPI <b>0.32</b> <span class="pill over">Over for the week</span></span>
+      </div>
+      <div class="area-body">
+        <table>
+          <thead>
+            <tr><th>Cost Element</th><th class="num">Equipment</th><th class="num">Labor</th><th class="num">IGCC Staff</th><th class="num">Materials</th><th class="num">Unit Rate</th><th class="num">Workshop</th><th class="num">Total</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Direct</td><td class="num">14,475</td><td class="num">1,428</td><td class="num">22,344</td><td class="num">18,250</td><td class="num">0</td><td class="num">0</td><td class="num"><b>56,497</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. PRODUCTIVITY ============ -->
+  <section id="productivity">
+    <div class="sec-head">
+      <span class="sec-no">03</span>
+      <h2>Productivity</h2>
+      <span class="sec-note">30 June – 6 July 2026</span>
+    </div>
+    <div class="grid-2">
+      <div>
+        <table>
+          <caption>Flowlines &amp; AG-25</caption>
+          <thead>
+            <tr><th>Type</th><th>Item</th><th class="num">Deployed / Output</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Equipment</td><td>Pipe Catcher</td><td class="num">8</td></tr>
+            <tr><td>Equipment</td><td>Side Boom</td><td class="num">3 FL</td></tr>
+            <tr><td>Equipment</td><td>Shovel</td><td class="num">3 GRE</td></tr>
+            <tr><td>Equipment</td><td>Crane</td><td class="num">2 GRE</td></tr>
+            <tr><td>Equipment</td><td>Crawler</td><td class="num">0</td></tr>
+            <tr><td>Activity</td><td>GRE Jointing</td><td class="num">29 joints</td></tr>
+            <tr><td>Activity</td><td>Fit-up AG-25 (EA)</td><td class="num">22 joints</td></tr>
+            <tr><td>Activity</td><td>Leveling</td><td class="num">0.75</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <table>
+          <caption>Well Pads &amp; Questor</caption>
+          <thead>
+            <tr><th>Type</th><th>Item</th><th class="num">Deployed / Output</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Equipment</td><td>Crane 55 ton</td><td class="num">5 WP · 2 QSTR</td></tr>
+            <tr><td>Equipment</td><td>Tanker</td><td class="num">4</td></tr>
+            <tr><td>Equipment</td><td>Shovel</td><td class="num">2</td></tr>
+            <tr><td>Equipment</td><td>JCB</td><td class="num">1</td></tr>
+            <tr><td>Equipment</td><td>Crane 130 ton</td><td class="num">0</td></tr>
+            <tr><td>Activity</td><td>Install precast foundations (P14 + P12)</td><td class="num">5 EA + 9 EA</td></tr>
+            <tr><td>Activity</td><td>Compact layer 3 for foundation (P14)</td><td class="num">49 EA</td></tr>
+            <tr><td>Activity</td><td>Leveling (RT-31 / RT-33) using JCB</td><td class="num">—</td></tr>
+            <tr><td>Activity</td><td>T-Wall installation (Y-TL-01)</td><td class="num">N/A</td></tr>
+            <tr><td>Activity</td><td>Backfill pipe support (P12)</td><td class="num">0</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. WP RSC ============ -->
+  <section id="wp-rsc">
+    <div class="sec-head">
+      <span class="sec-no">04</span>
+      <h2>Actual Cost Breakdown — Well Pads (WP RSC)</h2>
+      <span class="sec-note">Equipment &amp; labor · this week</span>
+    </div>
+    <div class="grid-2">
+      <div>
+        <table>
+          <caption>Direct Equipment</caption>
+          <thead>
+            <tr><th>Resource</th><th class="num">Qty</th><th class="num">Rate ($/unit)</th><th class="num">Total ($)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>HIAB</td><td class="num">20</td><td class="num">290</td><td class="num">5,800</td></tr>
+            <tr><td>Crane 55 ton</td><td class="num">7</td><td class="num">520</td><td class="num">3,640</td></tr>
+            <tr><td>Trailer</td><td class="num">12</td><td class="num">190</td><td class="num">2,280</td></tr>
+            <tr><td>Tanker</td><td class="num">10</td><td class="num">160</td><td class="num">1,600</td></tr>
+            <tr><td>Shovel</td><td class="num">2</td><td class="num">220</td><td class="num">440</td></tr>
+            <tr><td>Forklift</td><td class="num">1</td><td class="num">285</td><td class="num">285</td></tr>
+            <tr><td>Rubber Wheel Compactor</td><td class="num">1</td><td class="num">220</td><td class="num">220</td></tr>
+            <tr><td>JCB</td><td class="num">1</td><td class="num">210</td><td class="num">210</td></tr>
+            <tr class="total"><td>Direct Subtotal</td><td class="num">54</td><td class="num"></td><td class="num">14,475</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <table>
+          <caption>Indirect Equipment</caption>
+          <thead>
+            <tr><th>Resource</th><th class="num">Qty</th><th class="num">Rate ($/unit)</th><th class="num">Total ($)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Starex</td><td class="num">176</td><td class="num">60</td><td class="num">10,560</td></tr>
+            <tr><td>KIA Bongo</td><td class="num">54</td><td class="num">80</td><td class="num">4,320</td></tr>
+            <tr><td>Pick-up</td><td class="num">33</td><td class="num">60</td><td class="num">1,980</td></tr>
+            <tr><td>Hino</td><td class="num">12</td><td class="num">120</td><td class="num">1,440</td></tr>
+            <tr><td>Low Loader</td><td class="num">5</td><td class="num">240</td><td class="num">1,200</td></tr>
+            <tr><td>Vacuum Truck</td><td class="num">5</td><td class="num">170</td><td class="num">850</td></tr>
+            <tr><td>Waste Disposal</td><td class="num">5</td><td class="num">150</td><td class="num">750</td></tr>
+            <tr><td>Ambulance</td><td class="num">6</td><td class="num">80</td><td class="num">480</td></tr>
+            <tr class="total"><td>Indirect Subtotal</td><td class="num">296</td><td class="num"></td><td class="num">21,580</td></tr>
+          </tbody>
+        </table>
+        <table>
+          <caption>Labor — Actual Cost</caption>
+          <thead>
+            <tr><th>Category</th><th>Project</th><th>Period</th><th class="num">Qty</th><th class="num">Rate ($)</th><th class="num">Cost ($)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Daily</td><td>WP</td><td>Week-2</td><td class="num">30</td><td class="num">28</td><td class="num">840</td></tr>
+            <tr><td>Daily</td><td>QSTR</td><td>Week-2</td><td class="num">21</td><td class="num">28</td><td class="num">588</td></tr>
+            <tr class="total"><td colspan="5">Total Actual Labor Cost</td><td class="num">1,428</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. FL RSC ============ -->
+  <section id="fl-rsc">
+    <div class="sec-head">
+      <span class="sec-no">05</span>
+      <h2>Actual Cost Breakdown — Flowlines (FL RSC)</h2>
+      <span class="sec-note">Equipment &amp; labor · this week</span>
+    </div>
+    <div class="grid-2">
+      <div>
+        <table>
+          <caption>Equipment — Direct &amp; Indirect</caption>
+          <thead>
+            <tr><th>Type</th><th>Resource</th><th class="num">Qty</th><th class="num">Rate ($/unit)</th><th class="num">Total ($)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Direct</td><td>Side Boom</td><td class="num">3</td><td class="num">630</td><td class="num">1,890</td></tr>
+            <tr><td>Direct</td><td>Crane 55 ton</td><td class="num">2</td><td class="num">520</td><td class="num">1,040</td></tr>
+            <tr><td>Direct</td><td>Trailer</td><td class="num">5</td><td class="num">190</td><td class="num">950</td></tr>
+            <tr><td>Direct</td><td>Excavator</td><td class="num">3</td><td class="num">260</td><td class="num">780</td></tr>
+            <tr><td>Direct</td><td>Shovel</td><td class="num">3</td><td class="num">220</td><td class="num">660</td></tr>
+            <tr><td>Direct</td><td>HIAB</td><td class="num">2</td><td class="num">290</td><td class="num">580</td></tr>
+            <tr><td>Direct</td><td>Forklift</td><td class="num">2</td><td class="num">285</td><td class="num">570</td></tr>
+            <tr><td>Direct</td><td>Tanker</td><td class="num">1</td><td class="num">160</td><td class="num">160</td></tr>
+            <tr class="subtotal"><td colspan="4">Direct Subtotal</td><td class="num">6,630</td></tr>
+            <tr><td>Indirect</td><td>Pipe Catcher</td><td class="num">8</td><td class="num">300</td><td class="num">2,400</td></tr>
+            <tr><td>Indirect</td><td>Pick-up</td><td class="num">14</td><td class="num">60</td><td class="num">840</td></tr>
+            <tr><td>Indirect</td><td>Low Loader</td><td class="num">3</td><td class="num">240</td><td class="num">720</td></tr>
+            <tr><td>Indirect</td><td>Ambulance</td><td class="num">7</td><td class="num">80</td><td class="num">560</td></tr>
+            <tr><td>Indirect</td><td>KIA Bongo</td><td class="num">7</td><td class="num">80</td><td class="num">560</td></tr>
+            <tr><td>Indirect</td><td>Starex</td><td class="num">6</td><td class="num">60</td><td class="num">360</td></tr>
+            <tr><td>Indirect</td><td>Tipper Truck</td><td class="num">1</td><td class="num">190</td><td class="num">190</td></tr>
+            <tr class="subtotal"><td colspan="4">Indirect Subtotal</td><td class="num">5,630</td></tr>
+            <tr class="total"><td colspan="4">Total Equipment</td><td class="num">12,260</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <table>
+          <caption>Labor — Actual Cost</caption>
+          <thead>
+            <tr><th>Category</th><th>Project</th><th>Period</th><th class="num">Qty</th><th class="num">Rate ($)</th><th class="num">Cost ($)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Daily</td><td>FL</td><td>Week-2</td><td class="num">56</td><td class="num">28</td><td class="num">1,568</td></tr>
+            <tr><td>Monthly</td><td>FL</td><td>Week-2</td><td class="num">35</td><td class="num">28</td><td class="num">980</td></tr>
+            <tr class="total"><td colspan="5">Total Actual Labor Cost</td><td class="num">2,548</td></tr>
+          </tbody>
+        </table>
+        <div class="callout" style="margin-top:6px;">
+          <b>Cross-check:</b> all figures reconcile — FL direct equipment (6,630) and labor (2,548) match the Flowlines &amp; AG-25 actuals in Section 02, and WP direct equipment (14,475) and labor (1,428) match Well Pads &amp; Questor.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>ERTAWI · WEEKLY COST REPORT · WEEK 2 JULY 2026 · 30 JUN – 6 JUL</span>
+    <span>PREPARED BY COST CONTROL · ALL FIGURES IN USD</span>
+  </footer>
+</div>
+</body>
+</html>
