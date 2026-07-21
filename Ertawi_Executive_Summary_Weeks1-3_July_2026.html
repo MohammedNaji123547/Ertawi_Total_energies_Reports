@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ertawi Cost Control — Executive Summary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#17222D;
+    --ink-soft:#4A5A68;
+    --line:#C9D2DA;
+    --line-strong:#8FA0AE;
+    --paper:#FFFFFF;
+    --bg:#EEF1F4;
+    --blueprint:#0F3D5C;
+    --blueprint-deep:#0A2B42;
+    --amber:#C77F17;
+    --red:#B3382C;
+    --red-bg:#FBEDEB;
+    --green:#1E7A4E;
+    --green-bg:#EAF4EE;
+    --neutral-bg:#F2F5F7;
+    --gray:#5B6B78;
+    --gray-bg:#EEF1F3;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'IBM Plex Sans',Arial,sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    font-size:15px;
+    line-height:1.45;
+  }
+  .sheet{
+    max-width:1080px;
+    margin:24px auto;
+    background:var(--paper);
+    border:1px solid var(--line-strong);
+    box-shadow:0 2px 14px rgba(15,61,92,.10);
+  }
+
+  /* ===== Title block ===== */
+  .titleblock{
+    border-bottom:3px solid var(--blueprint-deep);
+    display:grid;
+    grid-template-columns:1fr auto;
+  }
+  .tb-main{padding:26px 32px 20px;}
+  .tb-eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--blueprint);margin-bottom:8px;
+  }
+  h1{
+    font-family:'IBM Plex Sans Condensed',sans-serif;
+    font-size:32px;font-weight:700;line-height:1.1;color:var(--blueprint-deep);
+  }
+  .tb-sub{margin-top:6px;color:var(--ink-soft);font-size:14px;}
+  .tb-meta{
+    display:grid;grid-template-columns:1fr 1fr;
+    border-left:1px solid var(--line-strong);
+    min-width:320px;
+  }
+  .tb-cell{
+    padding:12px 18px;border-bottom:1px solid var(--line);
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  .tb-cell:nth-child(odd){border-right:1px solid var(--line);}
+  .tb-cell:nth-last-child(-n+2){border-bottom:none;}
+  .tb-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);}
+  .tb-value{font-weight:600;font-size:13.5px;margin-top:2px;}
+
+  /* ===== KPI strip ===== */
+  .kpis{
+    display:grid;grid-template-columns:repeat(5,1fr);
+    border-bottom:1px solid var(--line-strong);
+  }
+  .kpi{padding:20px 20px;border-right:1px solid var(--line);}
+  .kpi:last-child{border-right:none;}
+  .kpi-label{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-soft);}
+  .kpi-value{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:24px;font-weight:600;margin-top:6px;color:var(--blueprint-deep);
+    font-variant-numeric:tabular-nums;
+  }
+  .kpi-note{font-size:11px;color:var(--ink-soft);margin-top:4px;}
+  .kpi-value.bad{color:var(--red);}
+  .kpi-value.warn{color:var(--amber);}
+  .kpi-value.good{color:var(--green);}
+
+  /* ===== Executive summary ===== */
+  .execsum{
+    margin:26px 32px 0;
+    border:1px solid var(--blueprint);
+    background:linear-gradient(180deg,#F5F8FA,#FFFFFF);
+    padding:18px 22px;
+  }
+  .execsum-tag{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--blueprint);font-weight:600;margin-bottom:8px;
+  }
+  .execsum p{font-size:14px;color:var(--ink);margin-bottom:8px;}
+  .execsum p:last-child{margin-bottom:0;}
+  .execsum b{color:var(--blueprint-deep);}
+
+  /* ===== Sections ===== */
+  section{padding:30px 32px 8px;}
+  section:last-of-type{padding-bottom:34px;}
+  .sec-head{display:flex;align-items:baseline;gap:14px;border-bottom:2px solid var(--blueprint-deep);padding-bottom:8px;margin-bottom:18px;}
+  .sec-no{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--amber);letter-spacing:.08em;}
+  h2{font-family:'IBM Plex Sans Condensed',sans-serif;font-size:21px;font-weight:700;color:var(--blueprint-deep);}
+  .sec-note{font-size:12.5px;color:var(--ink-soft);margin-left:auto;font-family:'IBM Plex Mono',monospace;}
+  h3{font-family:'IBM Plex Sans Condensed',sans-serif;font-size:15.5px;font-weight:600;color:var(--blueprint);margin:2px 0 10px;letter-spacing:.02em;}
+
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:22px;}
+  .grid-2 > div{min-width:0;}
+
+  /* ===== Tables ===== */
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin-bottom:20px;}
+  caption{text-align:left;font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:600;font-size:15.5px;color:var(--blueprint);padding-bottom:8px;}
+  th{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+    color:#fff;background:var(--blueprint);text-align:left;padding:8px 10px;font-weight:500;
+  }
+  th.num,td.num{text-align:right;font-variant-numeric:tabular-nums;}
+  td{padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top;}
+  td.num{font-family:'IBM Plex Mono',monospace;font-size:13px;}
+  tbody tr:nth-child(even){background:var(--neutral-bg);}
+  tr.total td{
+    border-top:2px solid var(--blueprint-deep);border-bottom:none;
+    font-weight:700;background:#E7EDF2;
+  }
+  tr.total td.num{font-weight:600;}
+  .pill{
+    display:inline-block;padding:1px 9px;border-radius:3px;
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;
+  }
+  .pill.over{background:var(--red-bg);color:var(--red);}
+  .pill.on{background:var(--green-bg);color:var(--green);}
+  .pill.neutral{background:var(--gray-bg);color:var(--gray);}
+  .neg{color:var(--red);}
+  .ok{color:var(--green);}
+
+  .bar-wrap{background:#E2E8ED;height:9px;border-radius:2px;overflow:hidden;min-width:90px;}
+  .bar{height:100%;background:var(--red);}
+  .bar.ok{background:var(--green);}
+
+  .callout{
+    border-left:4px solid var(--amber);background:#FCF6EC;
+    padding:12px 16px;font-size:13.5px;color:#5C4A1E;margin:0 0 22px;
+  }
+  .callout b{color:#3F3210;}
+  .callout.issue{border-left-color:var(--red);background:var(--red-bg);color:#6B2620;}
+  .callout.issue b{color:#4A1712;}
+
+  footer{
+    border-top:2px solid var(--blueprint-deep);
+    padding:14px 32px;display:flex;justify-content:space-between;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);
+    letter-spacing:.05em;
+  }
+
+  @media (max-width:900px){
+    .kpis{grid-template-columns:1fr 1fr;}
+    .kpi{border-bottom:1px solid var(--line);}
+    .grid-2{grid-template-columns:1fr;}
+    .titleblock{grid-template-columns:1fr;}
+    .tb-meta{border-left:none;border-top:1px solid var(--line-strong);}
+  }
+  @media print{
+    body{background:#fff;}
+    .sheet{margin:0;border:none;box-shadow:none;max-width:none;}
+    section{page-break-inside:avoid;}
+    th,td,tr{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <!-- ============ TITLE BLOCK ============ -->
+  <header class="titleblock">
+    <div class="tb-main">
+      <div class="tb-eyebrow">Ertawi &middot; Cost Control</div>
+      <h1>Ertawi Cost Control — Executive Summary</h1>
+      <div class="tb-sub">Three-Week Rollup — Flowlines/GRE Lines, AG-25, Well Pads, Questor &amp; Valve Station <span style="color:var(--amber);font-weight:600;">(EV corrected for additional scope)</span></div>
+    </div>
+    <div class="tb-meta">
+      <div class="tb-cell"><span class="tb-label">Period Covered</span><span class="tb-value">22 June – 13 July 2026</span></div>
+      <div class="tb-cell"><span class="tb-label">Reporting Weeks</span><span class="tb-value">Week 1 – Week 3, July</span></div>
+      <div class="tb-cell"><span class="tb-label">Prepared By</span><span class="tb-value">Cost Control</span></div>
+      <div class="tb-cell"><span class="tb-label">Currency</span><span class="tb-value">USD</span></div>
+    </div>
+  </header>
+
+  <!-- ============ KPI STRIP ============ -->
+  <div class="kpis">
+    <div class="kpi">
+      <div class="kpi-label">Earned Value (Corrected)</div>
+      <div class="kpi-value">214,196</div>
+      <div class="kpi-note">3-wk total, incl. additional scope</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Actual Cost (3-Wk Total)</div>
+      <div class="kpi-value">275,076</div>
+      <div class="kpi-note">All projects</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Overall CPI (Corrected)</div>
+      <div class="kpi-value warn">0.78</div>
+      <div class="kpi-note">Was 0.41 before correction</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">CPI — Flowlines/GRE &amp; AG-25</div>
+      <div class="kpi-value good">1.14</div>
+      <div class="kpi-note">Was 0.30 before correction</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">CPI — Well Pads &amp; Questor</div>
+      <div class="kpi-value bad">0.63</div>
+      <div class="kpi-note">Was 0.45 before correction</div>
+    </div>
+  </div>
+
+  <!-- ============ EXECUTIVE SUMMARY ============ -->
+  <div class="execsum">
+    <div class="execsum-tag">Bottom Line</div>
+    <p><b>EV correction:</b> the three weekly reports did not capture <b>102,546 USD of earned value from additional scope</b> performed during the period — 33,895 USD on Well Pads &amp; Questor and 68,652 USD on Flowlines/GRE Lines &amp; AG-25. Once added, the picture changes substantially: corrected EV rises from 111,650 to <b>214,196 USD</b>, and overall CPI improves from 0.41 to <b>0.78</b>. Flowlines/GRE Lines &amp; AG-25 swings to a <b>favourable CPI of 1.14</b> (from 0.30); Well Pads &amp; Questor improves to 0.63 but remains below 1.0.</p>
+    <p><b>Data gap:</b> the source data for this additional scope shows a fourth line item that was cut off / not fully legible in the sheet provided. The 102,546 USD figure above reflects only the three confirmed rows — the corrected totals could move further once that item is confirmed. It's also not yet possible to allocate this additional scope down to the four individual projects (Well Pads &amp; Valve Station, Flow Line &amp; Cable Work, Questor, AG-25); it is shown as a separate unallocated line until that split is available.</p>
+    <p><b>Underlying cost picture is unchanged by this correction:</b> IGCC staff cost remains a real driver of actual cost — running well above its earned value across all three weeks — and materials cost on Well Pads &amp; Questor more than doubled week over week (0 → 19,000 → 38,300). These are cost-side issues, independent of the EV correction, and still warrant review.</p>
+    <p><b>Recommendation:</b> (1) confirm the missing fourth line item and the project-level split for the additional scope EV; (2) re-baseline future weekly reports to capture this scope going forward so it isn't missed again; (3) continue to track IGCC staffing cost and Well Pads &amp; Questor materials spend, which remain the primary cost-side concerns even after the EV correction.</p>
+  </div>
+
+  <!-- ============ 1. COST PERFORMANCE BY AREA ============ -->
+  <section id="performance">
+    <div class="sec-head">
+      <span class="sec-no">01</span>
+      <h2>Cost Performance by Area — Corrected for Additional Scope</h2>
+      <span class="sec-note">3-Week Aggregate</span>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Area</th><th class="num">EV (Originally Reported)</th><th class="num">Additional Scope EV</th><th class="num">EV (Corrected)</th><th class="num">AC</th><th class="num">CPI (Corrected)</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Well Pads &amp; Questor</td><td class="num">86,762</td><td class="num">33,895</td><td class="num">120,657</td><td class="num">192,984</td><td class="num neg">0.63</td><td><span class="pill over">Over Budget</span></td></tr>
+        <tr><td>Flowlines/GRE Lines &amp; AG-25</td><td class="num">24,888</td><td class="num">68,652</td><td class="num">93,540</td><td class="num">82,092</td><td class="num ok">1.14</td><td><span class="pill on">Within Budget</span></td></tr>
+        <tr class="total"><td>Total</td><td class="num">111,650</td><td class="num">102,546</td><td class="num">214,196</td><td class="num">275,076</td><td class="num">0.78</td><td></td></tr>
+      </tbody>
+    </table>
+    <div class="callout issue">
+      <b>Correction basis:</b> Additional Scope EV totals only the three confirmed line items — Well Pads &amp; Questor 15,880 + 18,015 = 33,895; Flowlines/GRE Lines &amp; AG-25 = 68,652. A fourth line item in the source sheet was cut off / not fully legible; once confirmed, these totals may increase further. Please share the complete additional-scope listing to finalize this table.
+    </div>
+  </section>
+
+  <!-- ============ 2. EARNED VALUE BY PROJECT ============ -->
+  <section id="ev-project">
+    <div class="sec-head">
+      <span class="sec-no">02</span>
+      <h2>Earned Value by Project</h2>
+      <span class="sec-note">3-Week Aggregate</span>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Project</th><th class="num">EV (USD)</th><th class="num">Share</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Well Pads &amp; Valve Station</td><td class="num">78,284</td><td class="num">36.5%</td></tr>
+        <tr><td>Flow Line &amp; Cable Work</td><td class="num">18,512</td><td class="num">8.6%</td></tr>
+        <tr><td>Questor</td><td class="num">8,478</td><td class="num">4.0%</td></tr>
+        <tr><td>AG-25</td><td class="num">6,376</td><td class="num">3.0%</td></tr>
+        <tr><td>Additional Scope <span style="color:var(--ink-soft);font-size:11.5px;">(unallocated by project)</span></td><td class="num">102,546</td><td class="num">47.9%</td></tr>
+        <tr class="total"><td>Grand Total</td><td class="num">214,196</td><td class="num">100%</td></tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <b>Note:</b> the additional scope EV is known by area (Well Pads &amp; Questor vs. Flowlines/GRE Lines &amp; AG-25) but not yet by individual project. At 47.9% of the corrected total, this is now the single largest line in this table — allocating it to the four standard project categories would meaningfully change the distribution shown here.
+    </div>
+  </section>
+
+  <!-- ============ 3. FORECAST — EAC TREND ============ -->
+  <section id="forecast">
+    <div class="sec-head">
+      <span class="sec-no">03</span>
+      <h2>Forecast — EAC Trend</h2>
+      <span class="sec-note">June cutoff → Week 3 July</span>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Period</th><th class="num">EAC (USD)</th><th class="num">EAC Change vs Prior</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>June Cutoff</td><td class="num">32,800,488</td><td class="num">—</td></tr>
+        <tr><td>Week 1 of July</td><td class="num">32,904,378</td><td class="num neg">+103,890</td></tr>
+        <tr><td>Week 2 of July</td><td class="num">33,073,030</td><td class="num neg">+168,652</td></tr>
+        <tr><td>Week 3 of July</td><td class="num">33,295,905</td><td class="num neg">+222,875</td></tr>
+        <tr class="total"><td>Cumulative change since June cutoff</td><td class="num">+495,417</td><td class="num"></td></tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <b>Trend note:</b> the Estimate at Completion has increased by <b>495,417 USD (+1.5%)</b> since the June cutoff, with the weekly increase accelerating each period (+104K → +169K → +223K). This forecast trend was calculated from actual cost as originally captured and does not yet reflect the additional-scope EV correction in Section 01 above; if the missing earned value reflects genuine progress rather than cost growth, it may ease pressure on the EAC once incorporated into the underlying forecast basis.
+    </div>
+  </section>
+
+  <footer>
+    <span>ERTAWI · COST CONTROL EXECUTIVE SUMMARY · WEEKS 1–3 JULY 2026 · 22 JUN – 13 JUL</span>
+    <span>PREPARED BY COST CONTROL · ALL FIGURES IN USD</span>
+  </footer>
+</div>
+</body>
+</html>
